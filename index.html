@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rock-Paper-Scissors</title>
+    <meta charset="UTF-8/">
+</head>
+
+<body>
+    <div></div>
+    <script>
+        //My JavaScript Code Goes Here
+        let computerPlay = () => {
+            let random = Math.random();
+            return random < 0.33 ? "Rock" : (random < 0.66 ? "Paper" : "Scissors");
+        }
+        function playRound(playerSelection = "rock", computerSelection) {
+            if (playerSelection.charAt(0).toLowerCase() == computerSelection.charAt(0).toLowerCase())
+                return "Tie ! Let's play one more.";
+            else if (playerSelection.charAt(0).toLowerCase() == "p") {
+                if (computerSelection.charAt(0).toLowerCase() == "r") {
+                    playerScore++;
+                    return "You Lose! Paper beats Rock";
+                }
+                else {
+                    computerScore++;
+                    return "You lose! Scissors beats Paper";
+                }
+            }
+            else if (playerSelection.charAt(0).toLowerCase() == "r") {
+                if (computerSelection.charAt(0).toLowerCase() == "s") {
+                    playerScore++;
+                    return "You Lose! Rock beats Scissors";
+                }
+                else {
+                    computerScore++;
+                    return "You lose! Paper beats Rock";
+                }
+            }
+            else if (playerSelection.charAt(0).toLowerCase() == "s") {
+                if (computerSelection.charAt(0).toLowerCase() == "r") {
+                    computerScore++;
+                    return "You Lose! Rock beats Scissors";
+                }
+                else {
+                    playerScore++;
+                    return "You lose! Scissors beats Paper";
+                }
+            }
+
+        }
+
+        playerScore = 0;
+        computerScore = 0;
+        const body = document.querySelector('body');
+        const div = document.querySelector('div');
+        body.style.backgroundColor = "grey"
+        const button1 = document.createElement('button');
+        const button2 = document.createElement('button');
+        const button3 = document.createElement('button');
+        button1.textContent = "ROCK";
+        button2.textContent = "PAPER";
+        button3.textContent = "SCISSORS";
+        div.appendChild(button1);
+        div.appendChild(button2);
+        div.appendChild(button3);
+        const playerWin = document.createElement('p');
+        playerWin.textContent = "Congrulations, Player Wins !!"
+        playerWin.style.color = "white";
+        const pcWin = document.createElement('p');
+        pcWin.textContent = "Congrulations, Computer Wins !!";
+        pcWin.style.color = "white";
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(button => { button.style.color = "red"; button.style.backgroundColor = "yellow"; });
+        button1.addEventListener('click', () => {
+            const result = document.createElement('p');
+            result.style.color = "white";
+            div.appendChild(result);
+            result.textContent = playRound("rock", computerPlay()) + ` Player:${playerScore} Computer:${computerScore}`;
+            if ((playerScore == 5) || (computerScore == 5)) {
+                if (playerScore == 5)
+                    div.appendChild(playerWin);
+                else
+                    div.appendChild(pcWin);
+            }
+        });
+
+        button2.addEventListener('click', () => {
+            const result = document.createElement('p');
+            result.style.color = "white";
+            div.appendChild(result);
+            result.textContent = playRound("paper", computerPlay()) + ` Player:${playerScore} Computer:${computerScore}`;
+            if ((playerScore == 5) || (computerScore == 5)) {
+                if (playerScore == 5)
+                    div.appendChild(playerWin);
+                else
+                    div.appendChild(pcWin);
+            }
+        });
+
+        button3.addEventListener('click', () => {
+            const result = document.createElement('p');
+            result.style.color = "white";
+            div.appendChild(result);
+            result.textContent = playRound("scissors", computerPlay()) + ` Player:${playerScore} Computer:${computerScore}`;
+            if ((playerScore == 5) || (computerScore == 5)) {
+                if (playerScore == 5)
+                    div.appendChild(playerWin);
+                else
+                    div.appendChild(pcWin);
+            }
+        });
+
+    </script>
+</body>
+
+</html>
